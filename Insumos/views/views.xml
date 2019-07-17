@@ -1,0 +1,51 @@
+<odoo>
+  <data>
+
+    <menuitem id="menu_root_insumos" name="Insumos" sequence="30"/>
+    <menuitem id="reportes_insumos" name="Reportes" parent="menu_root_insumos"/>
+    
+    <record model="ir.ui.view" id="form_insumos">
+      <field name="name">Form insumos</field>
+      <field name="model">insumos.monopark</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group string="Datos del nuevo producto">
+              <group>
+                <field name="producto" required="1"/>
+                <field name="marca"/>
+                <field name="cantidad"/>
+                <field name="unidad_medida"/>
+              </group>
+              <group>
+                <field name="proveedor" domain = "[('supplier', '=', True)] "/>
+                <field name="costo"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="tree_insumos">
+      <field name="name">Tree insumos</field>
+      <field name="model">insumos.monopark</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="producto"/>
+          <field name="marca"/>
+          <field name="cantidad"/>
+          <field name="proveedor"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_tree_insumos">
+      <field name="name">Lista insumos</field>
+      <field name="res_model">insumos.monopark</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="reportes_dia" name="Reportes por dia" parent="reportes_insumos" action="action_tree_insumos"/>
+  </data>
+</odoo>
